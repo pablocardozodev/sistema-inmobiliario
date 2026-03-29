@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Inmobiliario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Sitema Inmobiliario</a>
+      <div class="d-flex">
+        <button class="btn btn-light me-2">Notificaciones</button>
+        <button class="btn btn-light me-2">Ayuda</button>
+        <span class="navbar-text text-white">Hola, Juan Pérez</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-2 bg-light p-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="propiedades.html">Propiedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="clientes.html">Clientes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ventas & Contratos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Materiales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Licitaciones</a></li>
+        </ul>
+      </aside>
+
+      <!-- Panel central -->
+      <main class="col-md-10 p-4">
+        <!-- Fila 1: métricas -->
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">Propiedades</h6>
+                <p class="fs-4 text-primary" id="total-propiedades">0</p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">Clientes</h6>
+                <p class="fs-4 text-primary" id="total-clientes">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">Ventas en Curso</h6>
+                <p class="fs-4 text-primary">5</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-center shadow-sm">
+              <div class="card-body">
+                <h6 class="card-title">Próximas Visitas</h6>
+                <p class="fs-4 text-primary">3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila 2: últimos terrenos y agenda -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">Últimas Propiedades</div>
+                <ul id="ultimas-propiedades" class="list-group list-group-flush">
+                  <!-- Aquí se insertan los <li> dinámicamente desde JS -->
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card shadow-sm">
+                <div class="card-header bg-light fw-bold">Último Clientes</div>
+                <ul id="ultimos-clientes" class="list-group list-group-flush">
+                  <!-- Aquí se insertan los <li> dinámicamente desde JS -->
+                </ul>
+              </div>
+            </div>  
+          </div>
+
+          <!-- Fila 3: tareas y ofertas -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card shadow-sm">
+              <div class="card-header bg-light fw-bold">Agenda de Visitas</div>
+              <ul id="agenda-visitas" class="list-group list-group-flush">
+                <!-- Aquí se insertan las visitas dinámicamente -->
+              </ul>
+              <div class="card-footer text-end">
+                <button class="btn btn-primary btn-sm">Ver Calendario</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card shadow-sm">
+              <div class="card-header bg-light fw-bold">Últimas Ofertas</div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Juan López - $22,000</li>
+                <li class="list-group-item">Inmobiliaria Norte - $45,000</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        
+      </div>
+      </main>
+    </div>
+  </div>
+
+  <!--Editar Propiedad-->
+  <section id="seccion-editar-propiedad" style="display:none;">
+    <h1>Editar Propiedad</h1>
+      <form id="form-editar-propiedad">
+        <input type="hidden" id="editar-prop-id">
+        <input type="text" id="editar-ubicacion" placeholder="Nueva ubicación">
+        <input type="number" id="editar-precio" placeholder="Nuevo precio">
+        <select id="editar-estado">
+          <option value="libre">Libre</option>
+          <option value="ocupada">Ocupada</option>
+          <option value="reservada">Reservada</option>
+        </select>
+        <button type="submit">Guardar cambios</button>
+        <!--<button type="button" id="btn-restaurar-edicion-prop">Restaurar valores originales</button>-->
+        <button type="button" id="btn-cancelar-edicion-prop">Cancelar</button>
+      </form>
+    </section>
+
+  <!-- Importar el JS externo -->
+  --<script src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

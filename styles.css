@@ -1,0 +1,104 @@
+/* Diseño base: Tipografía y colores globales */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+h1, h2 {
+  color: #444;
+}
+
+/* Formularios: Estilo a inputs y botones para que se vean consistentes */
+
+input, select, button {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Secciones ocultas/visibles: Se puede usar clases para mostrar/ocultar formularios con transiciones suaves */
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Idea para demo: Mostrá que cada sección (crear cliente, crear propiedad, editar) aparece como un card con borde y sombra */
+
+section {
+  background: white;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* estilo “cards” */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 20px;
+}
+
+.propiedades-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.prop-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 15px;
+  width: 250px;
+  transition: transform 0.2s ease;
+}
+
+.prop-card:hover {
+  transform: translateY(-5px);
+}
+
+.prop-card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.prop-card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.prop-card button {
+  margin-right: 5px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.prop-card button:hover {
+  background-color: #0056b3;
+}

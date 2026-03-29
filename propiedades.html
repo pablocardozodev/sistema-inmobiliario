@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Inmobiliario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Sitema Inmobiliario</a>
+      <div class="d-flex">
+        <button class="btn btn-light me-2">Notificaciones</button>
+        <button class="btn btn-light me-2">Ayuda</button>
+        <span class="navbar-text text-white">Hola, Juan Pérez</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-2 bg-light p-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="propiedades.html">Propiedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="clientes.html">Clientes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ventas & Contratos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Materiales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Licitaciones</a></li>
+        </ul>
+      </aside>
+
+      <!-- Panel central -->
+      <main class="col-md-10 p-4">
+
+        <!--btn para linkear a propiedades libres-->
+        <!-- <ul class="list-unstyled">
+          <li><a href="propiedades-libres.html" class="btn btn-primary">Propiedades libres</a></li>
+        </ul> --> <!--Luego eliminar -->
+
+        <!--Listar todas las propiedades-->
+        <h1>Todas las Propiedades</h1>
+
+        <!--selector de filtros dinámico para que el usuario pueda ordenar las propiedades por distintos criterios 
+        (ubicación, precio, estado)-->
+        <div class="mb-3">
+          <label for="filtro-orden" class="form-label">Ordenar por:</label>
+          <select id="filtro-orden" class="form-select w-auto d-inline-block">
+            <option value="ubicacion">Ubicación (A-Z)</option>
+            <option value="precio">Precio (menor a mayor)</option>
+            <option value="estado">Estado (A-Z)</option>
+          </select>
+        </div>
+
+        <!--Btn para ubicar arriba derecha por bootstrap-->
+        <div class="d-flex justify-content-end mb-3">
+          <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalCrearPropiedad">
+            Nueva Propiedad
+          </button>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" type="checkbox" id="toggle-vista">
+          <label class="form-check-label" for="toggle-vista">Vista en tabla</label>
+        </div>
+
+        <section id="vista-tabla">
+          <table id="lista-todas-propiedades" class="table table-striped table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>Imagen</th>
+                <th>Ubicación</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Filas dinámicas -->
+            </tbody>
+          </table>
+        </section>
+
+        <section id="vista-cards" class="row d-none">
+          <!-- Cards dinámicas -->
+        </section>
+        
+        <!--Crear Propiedad-->
+        <!--<button id="btn-nueva-propiedad">Nueva Propiedad</button>
+        
+        <section id="seccion-crear-propiedad" style="display:none;">
+            <h1>Crear Propiedad</h1>
+            <form id="form-propiedad">
+            <input type="text" id="ubicacion" placeholder="Ubicación" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <select id="estado" required>
+                <option value="libre" selected>Libre</option>
+                <option value="ocupada">Ocupada</option>
+                <option value="reservada">Reservada</option>
+            </select>
+            <button type="submit">Crear</button>
+            <button type="button" id="btn-limpiar-propiedad">Limpiar</button>
+            <button type="button" id="btn-cancelar-propiedad">Cancelar</button>
+            </form>
+        </section>--> <!--Probamos con nuevo formulario en modal flotante-->
+
+        <!--Nuevo Crear Nuevo-->
+        <!-- Botón para abrir modal flotante -->
+        <!--<button id="btn-nuevo-propiedad" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearPropiedad">
+          Nueva Propiedadad
+        </button> --> <!--Usamos nuevo por boostrap. Eliminar luego-->
+
+        <!-- Modal Crear/Editar Propiedades -->
+        <div class="modal fade" id="modalCrearPropiedad" tabindex="-1" aria-labelledby="modalPropiedadLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalPropiedadLabel">Crear Propiedad</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              
+              <div class="modal-body">
+                <form id="form-propiedad">
+                  <input type="text" id="ubicacion" name="ubicacion" class="form-control mb-2" placeholder="Ubicación" required>
+                  <input type="number" id="precio" name="precio" class="form-control mb-2" placeholder="Precio" required>
+                  <select id="estado" required>
+                        <option value="libre" selected>Libre</option>
+                        <option value="ocupada">Ocupada</option>
+                        <option value="reservada">Reservada</option>
+                  </select>
+                </form>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" id="btn-limpiar-propiedad" class="btn btn-warning">Limpiar</button>
+                <button type="button" id="btn-cancelar-propiedad" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="form-propiedad" class="btn btn-primary">Crear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Editar Propiedad-->
+        <!--<section id="seccion-editar-propiedad" style="display:none;">
+            <h1>Editar Propiedad</h1>
+            <form id="form-editar-propiedad">
+                <input type="hidden" id="editar-prop-id">
+                <input type="text" id="editar-ubicacion" placeholder="Nueva ubicación">
+                <input type="number" id="editar-precio" placeholder="Nuevo precio">
+                <select id="editar-estado">
+                  <option value="libre">Libre</option>
+                  <option value="ocupada">Ocupada</option>
+                  <option value="reservada">Reservada</option>
+                </select>
+                <button type="submit">Guardar cambios</button>
+                
+                <button type="button" id="btn-cancelar-edicion-prop">Cancelar</button>
+            </form>
+        </section>-->
+          <!--<button type="button" id="btn-restaurar-edicion-prop">Restaurar valores originales</button>--> <!--no se usa-->
+
+         <!-- Modal Nuevo Editar Propiedad -->
+        <div class="modal fade" id="modalEditarPropiedad" tabindex="-1" aria-labelledby="modalEditarPropiedadLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEditarClienteLabel">Editar Propiedad 2</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              
+              <div class="modal-body">
+                <form id="form-editar-propiedad">
+                  <input type="hidden" id="editar-id" name="id">
+                  <input type="text" id="editar-ubicacion" name="ubicacion" class="form-control mb-2" placeholder="Nueva Ubicación" required>
+                  <input type="text" id="editar-precio" name="precio" class="form-control mb-2" placeholder="Nuevo precio" required>
+                  <select id="editar-estado">
+                    <option value="libre">Libre</option>
+                    <option value="ocupada">Ocupada</option>
+                    <option value="reservada">Reservada</option>
+                </select>
+                </form>
+              </div>
+              
+              <div class="modal-footer">
+                <button type="button" id="btn-cancelar-edicion-propiedad" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" form="form-editar-propiedad" class="btn btn-primary">Guardar cambios</button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+      </main>
+      
+    </div>
+  </div>
+
+  <!-- Importar el JS externo -->
+  <script src="propiedades.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

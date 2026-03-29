@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Inmobiliario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Sitema Inmobiliario</a>
+      <div class="d-flex">
+        <button class="btn btn-light me-2">Notificaciones</button>
+        <button class="btn btn-light me-2">Ayuda</button>
+        <span class="navbar-text text-white">Hola, Juan Pérez</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-2 bg-light p-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="propiedades.html">Propiedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="clientes.html">Clientes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ventas & Contratos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Materiales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Licitaciones</a></li>
+        </ul>
+      </aside>
+
+      <!-- Panel central -->
+      <main class="col-md-10 p-4">
+       
+    <!--Mostrar lista de todos los clientes-->
+    <!--<h1>Todos los Clientes</h1>
+      <section>
+          <ul id="lista-todos-clientes"></ul>
+      </section> --> <!--Luego eliminar-->
+
+      <h1>Todos los Clientes</h1>
+      <!--selector de filtros dinámico para que el usuario pueda ordenar los clientes por apellido 
+        (apellido)-->
+        <div class="mb-3">
+          <label for="filtro-orden" class="form-label">Ordenar por:</label>
+          <select id="filtro-orden">
+            <option value="apellido-asc">Apellido (A-Z)</option>
+            <option value="apellido-desc">Apellido (Z-A)</option>
+            <!--<option value="nombre-asc">Nombre (A-Z)</option>
+            <option value="nombre-desc">Nombre (Z-A)</option>-->
+          </select>
+        </div>
+
+        <!--Btn Nuevo Cliente a la derecha superoior por Bootstrap-->
+        <div class="d-flex justify-content-end mb-3">
+          <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalCrearCliente">
+            Nuevo Cliente
+          </button>
+        </div> 
+
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="toggle-vista-clientes">
+        <label class="form-check-label" for="toggle-vista-clientes">Vista en tabla</label>
+      </div>
+
+      <section id="vista-tabla-clientes">
+        <table id="lista-todos-clientes" class="table table-striped table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th>Cliente</th>
+              <th>Email</th>
+              <th>Teléfono</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Filas dinámicas -->
+          </tbody>
+        </table>
+      </section>
+
+      <section id="vista-cards-clientes" class="row d-none">
+        <!-- Cards dinámicas -->
+      </section>
+
+  <!--Para cliente sin propiedades-->
+  <!--<h1>Clientes sin Propiedades</h1>
+    <section>
+        <ul id="lista-clientes-sin-propiedades"></ul>
+    </section>
+    
+    <section id="seccion-asignar-propiedad" style="display:none;">
+      <h2>Asignar Propiedad</h2>
+      <form id="form-asignar-propiedad">
+        <input type="hidden" id="asignar-prop-id">
+        <label for="asignar-cliente-id">Cliente ID:</label>
+        <input type="text" id="asignar-cliente-id" required>
+        <button type="submit">Aceptar</button>
+        <button type="button" id="btn-cancelar-asignar">Cancelar</button>
+      </form>
+    </section>--> <!--luego eliminar-->
+
+    <!--Crear clientes-->
+    <!--<button id="btn-nuevo-cliente">Nuevo Cliente</button>
+
+    <section id="seccion-crear-cliente" style="display:none;">
+      <h1>Crear Cliente</h1>
+      <form id="form-cliente">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="telefono" placeholder="Teléfono">
+        <button type="submit">Crear</button>
+        <button type="button" id="btn-limpiar-cliente">Limpiar</button>
+        <button type="button" id="btn-cancelar-cliente">Cancelar</button>
+      </form>
+    </section>-->
+
+    <!--Nuevo Crear Cliente-->
+    <!-- Botón para abrir modal flotante -->
+<!--<button id="btn-nuevo-cliente" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearCliente">
+  Nuevo Cliente
+</button>--> <!--Usamos estilo por bootstrap, lo colocamos arriba-->
+
+<!-- Modal Crear/Editar Cliente -->
+<div class="modal fade" id="modalCrearCliente" tabindex="-1" aria-labelledby="modalClienteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalClienteLabel">Crear Cliente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+      <div class="modal-body">
+        <form id="form-cliente">
+          <input type="text" id="nombre" name="nombre" class="form-control mb-2" placeholder="Nombre" required>
+          <input type="text" id="apellido" name="apellido" class="form-control mb-2" placeholder="Apellido" required>
+          <input type="email" id="email" name="email" class="form-control mb-2" placeholder="Email" required>
+          <input type="tel" id="telefono" name="telefono" class="form-control mb-2" placeholder="Teléfono">
+        </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" id="btn-limpiar-cliente" class="btn btn-warning">Limpiar</button>
+        <button type="button" id="btn-cancelar-cliente" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="form-cliente" class="btn btn-primary">Crear</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+    <!--Editar clientes-->
+    <!--<section id="seccion-editar-cliente" style="display:none;">
+    <h1>Editar Cliente</h1>
+        <form id="form-editar-cliente">
+          <input type="hidden" id="editar-id">
+          <input type="text" id="editar-nombre" placeholder="Nuevo nombre">
+          <input type="email" id="editar-email" placeholder="Nuevo email">
+          <input type="tel" id="editar-telefono" placeholder="Nuevo telefono">
+          <button type="submit">Guardar cambios</button>
+          <button type="button" id="btn-cancelar-edicion-cliente">Cancelar</button>
+        </form>
+      </section> 
+      </main>
+    </div>
+  </div>-->
+
+      <!-- Modal Nuevo Editar Cliente -->
+    <div class="modal fade" id="modalEditarCliente" tabindex="-1" aria-labelledby="modalEditarClienteLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditarClienteLabel">Editar Cliente</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          
+          <div class="modal-body">
+            <form id="form-editar-cliente">
+              <input type="hidden" id="editar-id" name="id">
+              <input type="text" id="editar-nombre" name="nombre" class="form-control mb-2" placeholder="Nuevo nombre" required>
+              <input type="text" id="editar-apellido" name="apellido" class="form-control mb-2" placeholder="Nuevo apellido" required>
+              <input type="email" id="editar-email" name="email" class="form-control mb-2" placeholder="Nuevo email" required>
+              <input type="tel" id="editar-telefono" name="telefono" class="form-control mb-2" placeholder="Nuevo teléfono">
+            </form>
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" id="btn-cancelar-edicion-cliente" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" form="form-editar-cliente" class="btn btn-primary">Guardar cambios</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  <!-- Importar el JS externo -->
+  <script src="clientes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+

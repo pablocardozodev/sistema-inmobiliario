@@ -1,0 +1,154 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema Inmobiliario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Barra superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">Sitema Inmobiliario</a>
+      <div class="d-flex">
+        <button class="btn btn-light me-2">Notificaciones</button>
+        <button class="btn btn-light me-2">Ayuda</button>
+        <span class="navbar-text text-white">Hola, Juan Pérez</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <aside class="col-md-2 bg-light p-3">
+        <ul class="nav flex-column">
+          <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="propiedades.html">Propiedades</a></li>
+          <li class="nav-item"><a class="nav-link" href="clientes.html">Clientes</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Ventas & Contratos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Materiales</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Licitaciones</a></li>
+        </ul>
+      </aside>
+
+      <!-- Panel central -->
+      <main class="col-md-10 p-4">
+
+        <!--Listar propiedades liberes-->
+        <!--<h1>Propiedades Libres</h1>
+            <section>   
+                <ul id="lista-propiedades-libres"></ul>
+            </section>-->
+            <input type="file" id="fileInput" />
+            <button onclick="subirImagen(p.id, document.getElementById('fileInput'))">Subir imagen</button>
+        <section>
+          <div class="container mt-4">
+            <h2>Propiedades Libres</h2>
+            <div id="lista-propiedades-libres" class="row">
+              <!-- Aquí se insertan las cards dinámicamente -->
+               
+            </div>
+          </div>
+        </section>
+
+           <!--PRUEBA: Estilo tipo cards a la lista de propiedades-->
+        <div class="propiedades-container">
+            <div class="prop-card">
+                <h3>Propiedad #1</h3>
+                <p>Ubicación: Salta</p>
+                <p>Precio: $100.000</p>
+                <p>Estado: Libre</p>
+                <button>Editar</button>
+                <button>Asignar</button>
+            </div>
+
+            <div class="prop-card">
+                <h3>Propiedad #2</h3>
+                <p>Ubicación: Cafayate</p>
+                <p>Precio: $150.000</p>
+                <p>Estado: Ocupada</p>
+                <button>Editar</button>
+                <button>Asignar</button>
+            </div>
+        </div>
+        <!--Crear Propiedad-->
+        <button id="btn-nueva-propiedad">Nueva Propiedad</button>
+        
+        <section id="seccion-crear-propiedad" style="display:none;">
+            <h1>Crear Propiedad</h1>
+            <form id="form-propiedad">
+            <input type="text" id="ubicacion" placeholder="Ubicación" required>
+            <input type="number" id="precio" placeholder="Precio" required>
+            <select id="estado" required>
+                <option value="libre" selected>Libre</option>
+                <option value="ocupada">Ocupada</option>
+                <option value="reservada">Reservada</option>
+            </select>
+            <button type="submit">Crear</button>
+            <button type="button" id="btn-limpiar-propiedad">Limpiar</button>
+            <button type="button" id="btn-cancelar-propiedad">Cancelar</button>
+            </form>
+        </section>
+
+        <!--Editar Propiedad-->
+        <section id="seccion-editar-propiedad" style="display:none;">
+            <h1>Editar Propiedad</h1>
+            <form id="form-editar-propiedad">
+                <input type="hidden" id="editar-prop-id">
+                <input type="text" id="editar-ubicacion" placeholder="Nueva ubicación">
+                <input type="number" id="editar-precio" placeholder="Nuevo precio">
+                <select id="editar-estado">
+                <option value="libre">Libre</option>
+                <option value="ocupada">Ocupada</option>
+                <option value="reservada">Reservada</option>
+                </select>
+                <button type="submit">Guardar cambios</button>
+                <!--<button type="button" id="btn-restaurar-edicion-prop">Restaurar valores originales</button>-->
+                <button type="button" id="btn-cancelar-edicion-prop">Cancelar</button>
+            </form>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  
+    <!--Crear clientes-->
+    <button id="btn-nuevo-cliente">Nuevo Cliente</button>
+
+    <section id="seccion-crear-cliente" style="display:none;">
+      <h1>Crear Cliente</h1>
+      <form id="form-cliente">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="apellido" placeholder="Apellido" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="telefono" placeholder="Teléfono">
+        <button type="submit">Crear</button>
+        <button type="button" id="btn-limpiar-cliente">Limpiar</button>
+        <button type="button" id="btn-cancelar-cliente">Cancelar</button>
+      </form>
+    </section>
+
+
+    <!--Editar clientes-->
+    <section id="seccion-editar-cliente" style="display:none;">
+    <h1>Editar Cliente</h1>
+        <form id="form-editar-cliente">
+          <input type="hidden" id="editar-id">
+          <input type="text" id="editar-nombre" placeholder="Nuevo nombre">
+          <input type="email" id="editar-email" placeholder="Nuevo email">
+          <button type="submit">Guardar cambios</button>
+          <button type="button" id="btn-cancelar-edicion-cliente">Cancelar</button>
+        </form>
+      </section>
+  
+   
+  <!-- Importar el JS externo -->
+  <script src="propiedades.js"></script>
+  <script src="propiedades-libres.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
