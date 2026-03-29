@@ -7,6 +7,11 @@ from app.routers import clientes, propiedades, agenda   # 👈 ajustá según tu
 
 app = FastAPI()
 
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
+
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
